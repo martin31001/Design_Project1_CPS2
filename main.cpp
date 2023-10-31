@@ -11,7 +11,7 @@ using namespace std;
 ifstream OpenInputFile();
 
 int main() {
-    //vector<student> std_vec;
+    //vector<student> stud_vec;
     //ifstream playerlist = OpenInputFile(); //opens input file into object
     string stFirstName;
     string stLastName;
@@ -21,7 +21,7 @@ int main() {
 //    while (playerlist.good()) { // loops until all of the in file has been read
 //        playerlist >> stFirstName >> stLastName >> stPoints;
 //        Song tempplayer(stFirstName, stLastName, stPoints); //take in three arguments then creates a temp object to add to vector
-//        std_vec.push_back(tempplayer);
+//        stud_vec.push_back(tempplayer);
 //    }
     while (!(selection == -1)) { //loops until exit command has been given
         selection = -2;
@@ -39,9 +39,11 @@ int main() {
         switch(selection){
             case 0: //create a reservation
                 //displayVehicles();
-                string
+                string fName;
                 cout << "Enter your first name: ";
-
+                cin >> fName;
+                bool checkName = false;
+                for(int i = 0; i < stud_vec)
                 break;
 
         }

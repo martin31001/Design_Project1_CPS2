@@ -6,6 +6,7 @@
 #include "Reservation.h"
 #include <vector>
 #include <fstream>
+#include <string>
 
 using namespace std;
 ifstream OpenInputFile();
@@ -21,6 +22,8 @@ int main() {
     int driverPoint = -1;
     int selection = -2;
     bool quit = false;
+    string inputName;
+
     
 
     //load first 9 (no credits just drivers)
@@ -36,8 +39,37 @@ int main() {
         tempplayer.setStudent(stFirstName, stLastName, stPoints);
         stud_vec.push_back(tempplayer);
    }
+   Car tempCar;
+   tempCar.setType("truck");
+   tempCar.setColor("purple");
+   car_vec.pushback(tempCar);
+   tempCar.setType("compact");
+   tempCar.setColor("red");
+   car_vec.pushback(tempCar);
+   tempCar.setType("sedan");
+   tempCar.setColor("blue");
+   car_vec.pushback(tempCar);
+   tempCar.setType("truck");
+   tempCar.setColor("green");
+   car_vec.pushback(tempCar);
+   tempCar.setType("compact");
+   tempCar.setColor("blue");
+   car_vec.pushback(tempCar);
+   tempCar.setType("sedan");
+   tempCar.setColor("black");
+   car_vec.pushback(tempCar);
+   tempCar.setType("truck");
+   tempCar.setColor("black");
+   car_vec.pushback(tempCar);
+   tempCar.setType("compact");
+   tempCar.setColor("yellow");
+   car_vec.pushback(tempCar);
+   tempCar.setType("sedan");
+   tempCar.setColor("green");
+   car_vec.pushback(tempCar);
 
-    while (!(selection == -1)) { //loops until exit command has been given
+   while (!(selection == -1))
+   { // loops until exit command has been given
         selection = -2;
         cout << "Reservation System Menu : " << endl;
         cout << setw(10) << "( " << "0 )  " << ": Create Reservation";
@@ -50,27 +82,43 @@ int main() {
         cin >> selection;
         cout << endl;
         
-        string fName;
+        
 
         switch(selection){
             case 0: 
             //create a reservation
             //displayVehicles();
             int tempCredit;
-            cout << "Enter your first name: ";
-            cin >> fName;
+            student tempStudent;
+            cout << "Enter your first name: " << endl;
+            cin >> inputName;
             bool checkName = false;
-            for(int i = 9; i < stud_vec.size(); i++){
-                if(fName = stud_vec[i].firstName){
+            for(int i = 9; i < stud_vec.size(); i++){ //searches vector for matching name
+                if(inputName == stud_vec[i].studentFN()){
                     checkName = true;
-                    stud_vec[i].displayCredits();
+                    tempCredit = stud_vec[i].displayCredits();
+                    tempStudent = stud_vec[i];
                 }
                 else{
-                    cout << "Student name not in menu" << endl;
+                    cout << "Student name not in menu" << endl; //if the name isn't there print error message and return
                     break;
                 }
-
             }
+            if(tempCredit == 0){ //if zero credits passenger can't reserve
+                cout << "Student has zero credit's and can't reserve" << endl; //if the name isn't there print error message and return
+                break;
+            }
+            else{
+                displayVehicles(vector<car> carin); //display menu if passenger has credits
+            }
+             
+
+            int seatNumber;
+            cout << "Select a seat" << endl;
+            
+            //select by category or specific seat
+            //FillSeat(int seatNum, tempStudent );//if temp credit is enough and seat is empty ==> FILL SEAT
+            //assign unique 3 digit PIN number
             break;
             case 3: //display Reservations
                //displayVehicles(car_vec);
@@ -84,7 +132,15 @@ int main() {
 void displayVehicles(vector<car> carin){
     cout<<setw(10) << "Truck " << " Compact " << " Sedan " <<endl;
     cout<<setw(10) << " ------ " << " ------ " << " ------ " <<endl;
-    cout<<setw(10) << " Purple " << " Red " <<" Blue " 
+    cout<<setw(10) << " Purple " << " Red " <<" Blue " << endl;
+    cout <<setw(10)<< "(" <<car_vec.at(0).displayRow(1)<<") " << " ("<<  car_vec.at(1).displayRow(1) << ") " << " (" << car_vec.at(2).displayRow(1)<<") " <<endl;
+    cout <<setw(10)<< "(" <<car_vec.at(0).displayRow(2)<<" " << " ("<<  car_vec.at(1).displayRow(2) << ") " << " (" << car_vec.at(2).displayRow(2)<<") " <<endl;
+    cout<<setw(10) << " Green " << " Blue " <<" Black " << endl;
+    cout <<setw(10)<< "(" <<car_vec.at(3).displayRow(1)<<") " << " ("<<  car_vec.at(4).displayRow(1) << ") " << " (" << car_vec.at(5).displayRow(1)<<") " <<endl;
+    cout <<setw(10)<< "(" <<car_vec.at(3).displayRow(2)<<" " << " ("<<  car_vec.at(4).displayRow(2) << ") " << " (" << car_vec.at(5).displayRow(2)<<") " <<endl;
+    cout<<setw(10) << " Black " << " Yellow " <<" Green " << endl;
+    cout <<setw(10)<< "(" <<car_vec.at(6).displayRow(1)<<") " << " ("<<  car_vec.at(7).displayRow(1) << ") " << " (" << car_vec.at(8).displayRow(1)<<") " <<endl;
+    cout <<setw(10)<< "(" <<car_vec.at(6).displayRow(2)<<" " << " ("<<  car_vec.at(7).displayRow(2) << ") " << " (" << car_vec.at(8).displayRow(2)<<") " <<endl;
 };
 
 ifstream OpenInputFile()

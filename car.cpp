@@ -20,7 +20,11 @@ bool Car::CheckSeat(int seatNum){
 	return seatsFilled.at(seatNum-1);
 }
 
-bool Car::FillSeat(int seatNum,student studentIn){
+bool Car::FillSeat(student studentIn){
+	
+	
+
+
 	if(!seatsFilled.at(seatNum-1)){
 		seatsFilled.at(seatNum-1) = true;
 		seatsFilled.at(seatNum - 1) = studentIn;
@@ -30,6 +34,7 @@ bool Car::FillSeat(int seatNum,student studentIn){
 		return false;
 	}
 }
+void 
 void Car::EmptySeat(int seatNum){
 
 }

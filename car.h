@@ -12,8 +12,10 @@ class Car {
 		string carType;
 		string carColor;
 	public:
-		Car(int seatNum, string typeIn, string colorIn);
+		Car();
+		void setType(string type);
 		bool CheckSeats(); //Returns seat vector
+		void displayRow(int rowNum);
 		bool FillSeat(int seatNum); //Fills seat and returns operation sucsess
 		void EmptySeat(int seatNum);//Empties seat
 		void PrintAssignments(); //Prints Passenger list

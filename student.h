@@ -14,10 +14,10 @@ class student {
     int credits;
 
     public:
-
+    string studentFN(); //return student's first name
     void setStudent(string firstName, string lastName, int credits);//set name + credits
     string displayName(string firstName, string lastName);//display name 
-    int displayCredits(int cr);//display credits
+    int displayCredits();//display credits
 
 };
 

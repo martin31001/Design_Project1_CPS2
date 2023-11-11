@@ -1,9 +1,9 @@
 #include <iomanip>
 #include <iostream>
 #include <iomanip>
-#include "Student.h"
-#include "Car.h"
-#include "Reservation.h"
+#include "student.h"
+#include "car.h"
+#include "reservation.h"
 #include <vector>
 #include <fstream>
 #include <string>
@@ -12,9 +12,11 @@ using namespace std;
 ifstream OpenInputFile();
 void displayVehicles(vector<car> carin) const; 
 int main() {
+    vector<reservation> reser_vec;
+    //vector<int> reser_vec;
     vector<student> stud_vec;
     student tempplayer;
-    //vector<car> car_vec;
+   vector<car> car_vec;
     ifstream playerlist = OpenInputFile(); //opens input file into object
     string stFirstName;
     string stLastName;
@@ -25,7 +27,6 @@ int main() {
     string inputName;
 
     
-
     //load first 9 (no credits just drivers)
     for(int i = 0; i < 9; i++){
         playerlist >> stFirstName >> stLastName;
@@ -89,7 +90,8 @@ int main() {
             //create a reservation
             //displayVehicles();
             int tempCredit;
-            student tempStudent;
+            //student tempStudent;
+            int studentPoint;
             cout << "Enter your first name: " << endl;
             cin >> inputName;
             bool checkName = false;
@@ -97,31 +99,60 @@ int main() {
                 if(inputName == stud_vec[i].studentFN()){
                     checkName = true;
                     tempCredit = stud_vec[i].displayCredits();
-                    tempStudent = stud_vec[i];
+                    studentPoint= i;
+                    //tempStudent = stud_vec[i];
                 }
-                else{
+            }
+            if(!checkName){
                     cout << "Student name not in menu" << endl; //if the name isn't there print error message and return
                     break;
                 }
-            }
             if(tempCredit == 0){ //if zero credits passenger can't reserve
-                cout << "Student has zero credit's and can't reserve" << endl; //if the name isn't there print error message and return
+            cout << "Student has zero credit's and can't reserve" << endl; //if the name isn't there print error message and return
                 break;
             }
             else{
+
                 displayVehicles(vector<car> carin); //display menu if passenger has credits
             }
              
-
+            int carNumber;
             int seatNumber;
-            cout << "Select a seat" << endl;
+            cout << "Select a car";
+            cin >> carNumber;
+            cout << endl;
+            if(car_vec(carNumber-1).isFull()){
+                cout << "Entered Car is Full" << endl;
+                break;
+            };
             
-            //select by category or specific seat
-            //FillSeat(int seatNum, tempStudent );//if temp credit is enough and seat is empty ==> FILL SEAT
-            //assign unique 3 digit PIN number
+            cout << setw(10) << "Choose a seat" <<endl;
+            reservation tempRes;
+           //select by category or specific seat
+            //if(tempCredit == creditNumber){ //is the student's credit number enough?
+            
+            tempRes.createReservation(seatNumber,carNumber,stud_vec[studentPoint].studentFN())
+            reser_vec.push_back(tempRes);//if temp credit is enough and seat is empty ==> FILL SEAT
+           
+            //};
+            
             break;
-            case 3: //display Reservations
-               //displayVehicles(car_vec);
+            case 1:
+            int tempPin;
+            cout << "Enter passenger's name and pin number" << endl;
+            cin >> tempPin;
+            bool checkPin = false;
+
+            for(int i = 0; i < reser_vec.size(); i++){ //searches vector for matching pin number
+                if(tempPin == reser_vec[i].getPinNum()){
+                  checkPin = true;
+                }
+            }
+
+
+            case 3:
+            //display Reservations
+            //displayVehicles(car_vec);
             break;
         }
 
